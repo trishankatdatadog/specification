@@ -1218,9 +1218,11 @@ the timestamp metadata file.
   * **5.4.1**. **Check against timestamp role's snapshot hash.** The hashes
   of the new snapshot metadata file MUST match the hashes, if any, listed in
   the trusted timestamp metadata.  This is done, in part, to prevent a
-  mix-and-match attack by man-in-the-middle attackers.  If the hashes do not
-  match, discard the new snapshot metadata, abort the update cycle, and report
-  the failure.
+  mix-and-match attack by man-in-the-middle attackers. It is safe to check the
+  hashes before the signatures, because the hashes comes from the timestamp
+  role, which we have already verified in the previous step; it is also a quick
+  way to reject bad metadata. If the hashes do not match, discard the
+  new snapshot metadata, abort the update cycle, and report the failure.
 
   * **5.4.2**. **Check for an arbitrary software attack.** The new snapshot
   metadata file MUST have been signed by a threshold of keys specified in the
@@ -1265,9 +1267,11 @@ snapshot metadata file.
   * **5.5.1**. **Check against snapshot role's targets hash.** The hashes
   of the new targets metadata file MUST match the hashes, if any, listed in the
   trusted snapshot metadata.  This is done, in part, to prevent a mix-and-match
-  attack by man-in-the-middle attackers.  If the new targets metadata file does
-  not match, discard the new target metadata, abort the update cycle, and
-  report the failure.
+  attack by man-in-the-middle attackers. It is safe to check the hashes before
+  the signatures, because the hashes comes from the snapshot role, which we have
+  already verified in the previous step; it is also a quick way to reject bad
+  metadata. If the new targets metadata file does not match, discard the new
+  target metadata, abort the update cycle, and report the failure.
 
   * **5.5.2**. **Check for an arbitrary software attack.** The new targets
   metadata file MUST have been signed by a threshold of keys specified in the
